@@ -77,3 +77,13 @@ function csvJSON(csv) {
 
   return result;
 }
+
+function enableButtons() {
+  const convertButton = document.getElementById('convertButton');
+  const downloadButton = document.getElementById('downloadButton');
+  const copyButton = document.getElementById('copyButton');
+
+  convertButton.disabled = false;
+  downloadButton.disabled = false;
+  copyButton.disabled = false;
+}
