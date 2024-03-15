@@ -10,7 +10,12 @@
   <div class="container">
     <h1>Excel to JSON Converter</h1>
     <p>Upload an Excel (.xlsx, .xls) or CSV file and click the "Convert" button to generate JSON data. Once converted, you can download the JSON file or copy the JSON data to the clipboard.</p>
-    <input type="file" id="fileInput" accept=".xlsx, .xls, .csv">
+    <div>
+  <label for="fileInput" class="btn"></label>
+  <input type="file" id="fileInput" accept=".xlsx, .xls, .csv" onchange="convertToJSON()">
+  <span id="fileStatus"></span>
+</div>
+    
     <div class="button-container">
       <button id="convertButton" onclick="convertToJSON()">Convert</button>
       <button id="downloadButton" onclick="downloadJSON()" disabled>Download JSON</button>
@@ -18,8 +23,10 @@
     </div>
     <div id="output"></div>
   </div>
+  <script src="script.js"></script>
+
   <!-- use version 0.20.1 -->
-  <script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+<script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
