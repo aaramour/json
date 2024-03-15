@@ -69,7 +69,9 @@ function csvJSON(csv) {
 
     for (let j = 0; j < headers.length; j++) {
       // Trim each field to remove leading and trailing whitespace
-      obj[headers[j]] = currentLine[j].trim();
+      const fieldValue = currentLine[j].trim();
+      // Check if the field value is numeric
+      obj[headers[j]] = !isNaN(fieldValue) ? parseInt(fieldValue, 10) : fieldValue;
     }
 
     result.push(obj);
