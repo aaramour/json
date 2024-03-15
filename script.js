@@ -1,11 +1,14 @@
 function convertToJSON() {
   const fileInput = document.getElementById('fileInput');
+  const fileStatus = document.getElementById('fileStatus');
   const output = document.getElementById('output');
 
   if (!fileInput.files || fileInput.files.length === 0) {
-    output.innerHTML = '<div class="error">Please choose a file first.</div>';
+    showAlert('Please choose a file first.');
     return;
   }
+
+  fileStatus.innerHTML = '<span class="checkmark">&#10003;</span>';
 
   const file = fileInput.files[0];
   const reader = new FileReader();
@@ -30,18 +33,25 @@ function convertToJSON() {
         });
         return obj;
       });
+
+      // Check for empty rows and remove them
+      jsonData = jsonData.filter(row => Object.values(row).some(val => val && val.trim() !== ''));
     } else if (extension === 'csv') {
       const csv = e.target.result;
       if (csv) {
         jsonData = csvJSON(csv);
       } else {
-        output.innerHTML = '<div class="error">Failed to read the CSV file.</div>';
+        showAlert('Failed to read the CSV file.');
         return;
       }
     }
 
+    // Filter out empty objects
+    jsonData = jsonData.filter(obj => Object.keys(obj).length !== 0);
+
     output.innerHTML = '<pre>' + JSON.stringify(jsonData, null, 2) + '</pre>';
     enableButtons(); // Enable buttons after conversion
+    showAlert('JSON Conversion Complete! Download or Copy to Clipboard');
   };
 
   if (file) {
@@ -52,6 +62,22 @@ function convertToJSON() {
     }
   }
 }
+
+
+
+
+
+
+
+function removeEmptyObjects(jsonData) {
+  // Filter out empty objects
+  return jsonData.filter(obj => Object.keys(obj).length !== 0);
+}
+
+
+
+
+
 
 
 function getFileExtension(fileName) {
@@ -138,6 +164,7 @@ function showAlert(message, duration = 3000) {
     alertDiv.parentNode.removeChild(alertDiv);
   }, duration);
 }
+
 
 // Example usage
 // showAlert('This is an alert message.', 3000);

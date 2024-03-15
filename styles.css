@@ -36,3 +36,14 @@ button:hover:not(:disabled) {
   margin-top: 20px;
   text-align: left;
 }
+
+.checkmark {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  color: white;
+}
