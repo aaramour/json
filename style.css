@@ -4,20 +4,32 @@
   text-align: center;
 }
 
-input[type="file"] {
+.input-container {
   margin-bottom: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 button {
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #007bff; 
+  color: #fff; 
   border: none;
   cursor: pointer;
+  margin: 0 5px; /* Add some spacing between buttons */
 }
 
-button:hover {
-  background-color: #0056b3;
+button:disabled {
+  opacity: 0.6; /* Visually disabled state */
+  cursor: not-allowed; /* Change cursor to not-allowed */
+}
+
+button:hover:not(:disabled) {
+  background-color: #0056b3; /* Lighter shade of gray on hover */
 }
 
 #output {
