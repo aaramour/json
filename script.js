@@ -87,3 +87,26 @@ function enableButtons() {
   downloadButton.disabled = false;
   copyButton.disabled = false;
 }
+
+function downloadJSON() {
+  const jsonData = document.getElementById('output').innerText;
+  const fileInput = document.getElementById('fileInput');
+
+  // Get the name of the uploaded file
+  const fileName = fileInput.files[0].name.replace(/\.[^/.]+$/, ""); // Remove extension
+
+  const blob = new Blob([jsonData], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${fileName}.json`; // Set the filename
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function copyToClipboard() {
+  const jsonData = document.getElementById('output').innerText;
+  navigator.clipboard.writeText(jsonData);
+}
