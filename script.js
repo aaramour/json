@@ -108,5 +108,34 @@ function downloadJSON() {
 
 function copyToClipboard() {
   const jsonData = document.getElementById('output').innerText;
-  navigator.clipboard.writeText(jsonData);
+  navigator.clipboard.writeText(jsonData).then(() => {
+    showAlert('JSON data copied to clipboard!');
+  }, () => {
+    showAlert('Failed to copy JSON data to clipboard.');
+  });
 }
+
+function showAlert(message, duration = 3000) {
+  const alertDiv = document.createElement('div');
+  alertDiv.textContent = message;
+  alertDiv.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  `;
+  document.body.appendChild(alertDiv);
+
+  setTimeout(() => {
+    alertDiv.parentNode.removeChild(alertDiv);
+  }, duration);
+}
+
+// Example usage
+// showAlert('This is an alert message.', 3000);
