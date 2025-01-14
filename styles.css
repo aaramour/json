@@ -48,6 +48,12 @@ button:hover:not(:disabled) {
   bottom: 10px;
   font-size: 1rem;
   padding: 5px;
+  text-align: left;
+  margin-top: 0px;
+}
+
+#cr p {
+  margin-bottom: 0px;
 }
 
 .checkmark {
